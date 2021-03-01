@@ -22,6 +22,9 @@ class Student {
         "code": code,
         "result": List<dynamic>.from(result.map((x) => x.toMap())),
       };
+
+  @override
+  String toString() => toJson();
 }
 
 class Result {
@@ -54,6 +57,9 @@ class Result {
         "voucher": voucher,
         "course": course.toMap(),
       };
+
+  @override
+  String toString() => toJson();
 }
 
 class Course {
@@ -82,4 +88,7 @@ class Course {
         "title": title,
         "videos": List<dynamic>.from(videos.map((x) => x)),
       };
+
+  @override
+  String toString() => toJson();
 }

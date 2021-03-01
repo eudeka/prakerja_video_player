@@ -67,4 +67,7 @@ class YoutubeEmbed {
         "thumbnail_height": thumbnailHeight,
         "width": width,
       };
+
+  @override
+  String toString() => toJson();
 }

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../config/app_route.dart';
 import '../../model/student.dart';
 import '../../model/youtube_embed.dart';
 import '../../network/api_client.dart';
-import '../video/video_page.dart';
+import '../../provider/task_provider.dart';
+import '../../provider/video_provider.dart';
 
 class HomeCourses extends StatefulWidget {
   final Student student;
@@ -61,25 +64,36 @@ class _HomeCoursesState extends State<HomeCourses> {
             decoration: TextDecoration.underline,
           ),
         ),
-        onTap: () => Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (BuildContext context) => VideoPage(
-              url: result.course.videos[index],
-              student: result,
-            ),
-          ),
-        ),
+        onTap: () {
+          String url = result.course.videos[index];
+          context.read<VideoProvider>().setLastUrl(url);
+          AppRoute.push(AppRoute.videoPage);
+        },
       ),
     );
-    children.addAll(videos);
     return Padding(
       padding: EdgeInsets.only(
         top: 8.0,
         bottom: 8.0,
       ),
       child: Column(
-        children: children,
+        children: <Widget>[
+          ...children,
+          ...videos,
+          _tile(
+            title: Text(
+              'Final Task',
+              style: TextStyle(
+                decoration: TextDecoration.underline,
+              ),
+            ),
+            onTap: () {
+              TaskProvider provider = context.read<TaskProvider>();
+              provider.setLastCategory(result.course.sku);
+              AppRoute.push(AppRoute.taskPage);
+            },
+          ),
+        ],
         crossAxisAlignment: CrossAxisAlignment.start,
       ),
     );

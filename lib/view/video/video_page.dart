@@ -1,23 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:provider/provider.dart';
 
-import '../../model/student.dart';
+import '../../model/menu_item.dart';
 import '../../model/youtube_embed.dart';
 import '../../network/api_client.dart';
+import '../../provider/video_provider.dart';
 import '../../tool/format.dart';
 import '../../tool/player.dart';
-import '../../widget/base_scaffold.dart';
+import '../../widget/app_scaffold.dart';
 
 class VideoPage extends StatefulWidget {
-  final String url;
-  final Result student;
-
-  const VideoPage({
-    Key key,
-    @required this.url,
-    @required this.student,
-  }) : super(key: key);
-
   @override
   _VideoPageState createState() => _VideoPageState();
 }
@@ -29,6 +22,8 @@ class _VideoPageState extends State<VideoPage> {
   VideoPlayerValue _value;
   double _aspectRatio = 2.5;
   Duration _duration = Duration();
+
+  String get _url => context.read<VideoProvider>().getLastUrl();
 
   void _setTitle() async {
     YoutubeEmbed embed = await ApiClient.getVideoInfo(_id);
@@ -145,22 +140,20 @@ class _VideoPageState extends State<VideoPage> {
 
   @override
   void initState() {
-    _id = widget.url.split('youtu.be/')[1];
+    _id = _url.split('youtu.be/')[1];
     _setTitle();
-    _controller = VideoPlayerController.network(widget.url);
+    _controller = VideoPlayerController.network(_url);
     _initializePlayer();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BaseScaffold(
-      title: _title,
-      actions: <Widget>[
-        IconButton(
-          icon: Icon(Icons.restore),
-          onPressed: () => _refresh(reset: true),
-          tooltip: 'reset',
+    return AppScaffold(
+      actions: <MenuItem>[
+        MenuItem(
+          label: 'Reset',
+          onTap: () => _refresh(reset: true),
         ),
       ],
       body: ListView(
@@ -181,8 +174,6 @@ class _VideoPageState extends State<VideoPage> {
           ),
         ],
       ),
-      onRefresh: _refresh,
-      onReport: () async => await _controller.pause(),
     );
   }
 }

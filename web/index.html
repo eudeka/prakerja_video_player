@@ -10,20 +10,33 @@
       <meta name="apple-mobile-web-app-title" content="Eudeka!">
       <link rel="apple-touch-icon" href="icons/Icon-192.png">
       <link rel="icon" type="image/png" href="favicon.png"/>
+      <link rel="stylesheet" href="main.css">
       <title>Eudeka!</title>
       <link rel="manifest" href="manifest.json">
     </head>
   <body>
-    <style class="load">
-      #loader {
-        width: 50%;
-        margin: 25%;
-        text-align: center;
-      }
-    </style>
-    <progress class="load" id="loader">loading...</progress>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <meta name="google-signin-client_id" content="158633682273-nckdd02bdh0gg8aqqnevp8dtpuvpgj96.apps.googleusercontent.com">
+    <div class="wrapper">
+      <div class="blue ball"></div>
+      <div class="red ball"></div>
+      <div class="yellow ball"></div>
+      <div class="green ball"></div>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-auth.js"></script>
+    <script>
+    var firebaseConfig = {
+      apiKey: "AIzaSyAu7WkXs3PaojXvJ9NKT_u9U4hi9L-9JkI",
+      authDomain: "eudeka-indonesia.firebaseapp.com",
+      projectId: "eudeka-indonesia",
+      storageBucket: "eudeka-indonesia.appspot.com",
+      messagingSenderId: "537934132450",
+      appId: "1:537934132450:web:2577a03d6b6341ba2c1abb",
+      measurementId: "G-RG0NHW885B"
+    };
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+    </script>
     <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('flutter-first-frame', function () {
