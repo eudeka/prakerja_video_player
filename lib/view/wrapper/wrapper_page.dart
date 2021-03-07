@@ -1,5 +1,3 @@
-import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/material.dart';
 
 import '../../config/app_route.dart';
@@ -22,18 +20,11 @@ class WrapperPage extends StatefulWidget {
 }
 
 class _WrapperPageState extends State<WrapperPage> {
-  FirebaseAnalytics _analytics = FirebaseAnalytics();
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       navigatorKey: AppRoute.navigatorKey,
       onGenerateRoute: AppRoute.onGenerateRoute,
-      navigatorObservers: <NavigatorObserver>[
-        FirebaseAnalyticsObserver(
-          analytics: _analytics,
-        ),
-      ],
       builder: (BuildContext context, Widget child) => Material(
         child: child,
       ),
