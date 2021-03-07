@@ -19,31 +19,31 @@ class TaskContent extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         ListTile(
-          title: Text(quiz.question),
+          title: SelectableText(quiz.question),
         ),
         RadioListTile<String>(
           value: quiz.answerA,
           groupValue: value.answer,
           onChanged: (String answer) => provider.setLastAnswer(index, answer),
-          title: Text(quiz.answerA),
+          title: SelectableText(quiz.answerA),
         ),
         RadioListTile<String>(
           value: quiz.answerB,
           groupValue: value.answer,
           onChanged: (String answer) => provider.setLastAnswer(index, answer),
-          title: Text(quiz.answerB),
+          title: SelectableText(quiz.answerB),
         ),
         RadioListTile<String>(
           value: quiz.answerC,
           groupValue: value.answer,
           onChanged: (String answer) => provider.setLastAnswer(index, answer),
-          title: Text(quiz.answerC),
+          title: SelectableText(quiz.answerC),
         ),
         RadioListTile<String>(
           value: quiz.answerD,
           groupValue: value.answer,
           onChanged: (String answer) => provider.setLastAnswer(index, answer),
-          title: Text(quiz.answerD),
+          title: SelectableText(quiz.answerD),
         ),
       ],
     );

@@ -18,17 +18,14 @@ class _LoginPageState extends State<LoginPage> {
   AccountProvider get _account => context.read<AccountProvider>();
 
   Future<void> _initialize() async {
-    await Future.delayed(
-      Duration(
-        seconds: 4,
-      ),
-    );
-    _account.checkLogin();
     _timer = Timer.periodic(
       Duration(
         seconds: 1,
       ),
-      (Timer timer) => _account.checkLogin(),
+      (Timer timer) {
+        print(DateTime.now());
+        _account.checkLogin();
+      },
     );
   }
 

@@ -12,7 +12,9 @@ class TaskResult extends StatelessWidget {
   }) : super(key: key);
 
   int get _result {
-    return listQuiz.where((QuizValue value) => value.isCorrect).length;
+    int score = listQuiz.where((QuizValue value) => value.isCorrect).length;
+    score = ((score / listQuiz.length) * 100).toInt();
+    return score;
   }
 
   @override
@@ -20,7 +22,7 @@ class TaskResult extends StatelessWidget {
     return AlertDialog(
       title: Text('Your Result'),
       content: Text(
-        '$_result / ${listQuiz.length}',
+        '$_result',
         style: TextStyle(
           fontSize: 24.0,
         ),
