@@ -51,7 +51,6 @@ class ApiClient {
       Response response = await _dio.get(
         Constant.studentUrl,
         queryParameters: <String, dynamic>{
-          'version': Constant.version,
           'q': key,
         },
       );
@@ -81,7 +80,6 @@ class ApiClient {
     Response response = await _dio.get(
       Constant.studentUrl,
       queryParameters: <String, String>{
-        'version': Constant.version,
         'report': text,
       },
     );

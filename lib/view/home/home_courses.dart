@@ -123,6 +123,9 @@ class _HomeCoursesState extends State<HomeCourses> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      primary: false,
+      shrinkWrap: true,
+      padding: EdgeInsets.all(8.0),
       itemBuilder: (BuildContext context, int index) {
         return Card(
           margin: EdgeInsets.all(8.0),

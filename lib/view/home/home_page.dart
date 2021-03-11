@@ -11,11 +11,14 @@ import 'home_courses.dart';
 
 class HomePage extends StatelessWidget {
   Widget get _notFound {
-    return GestureDetector(
-      onTap: () async => await launch(Constant.whatsapp),
-      child: Text(
-        Constant.dataNotFound,
-        textAlign: TextAlign.center,
+    return Padding(
+      padding: EdgeInsets.all(16.0),
+      child: GestureDetector(
+        onTap: () async => await launch(Constant.whatsapp),
+        child: Text(
+          Constant.dataNotFound,
+          textAlign: TextAlign.center,
+        ),
       ),
     );
   }
@@ -41,9 +44,15 @@ class HomePage extends StatelessWidget {
                   if (student.result.isEmpty) return _notFound;
                   return HomeCourses(student: student);
                 } else if (snapshot.hasError) {
-                  return Text('${snapshot.error}');
+                  return Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Text('${snapshot.error}'),
+                  );
                 } else {
-                  return CircularProgressIndicator.adaptive();
+                  return Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: CircularProgressIndicator.adaptive(),
+                  );
                 }
               },
             ),

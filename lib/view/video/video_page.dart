@@ -157,6 +157,8 @@ class _VideoPageState extends State<VideoPage> {
         ),
       ],
       body: ListView(
+        primary: false,
+        shrinkWrap: true,
         children: <Widget>[
           AspectRatio(
             aspectRatio: _aspectRatio,

@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -70,6 +72,31 @@ class AppScaffold extends StatelessWidget {
     ];
   }
 
+  Widget _appBar(BuildContext context, {AccountProvider provider}) {
+    return Material(
+      color: Theme.of(context).primaryColor,
+      child: Container(
+        padding: EdgeInsets.all(8.0),
+        height: kToolbarHeight,
+        child: Row(
+          children: this._children(
+            context,
+            provider.user.email,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _footer(BuildContext context) {
+    return Container(
+      alignment: Alignment.center,
+      padding: EdgeInsets.all(16.0),
+      color: Theme.of(context).primaryColorLight,
+      child: Text('Copyright Eudeka 2021'),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<AccountProvider>(
@@ -81,21 +108,19 @@ class AppScaffold extends StatelessWidget {
         if (account.user == null) return LoginPage();
         return Column(
           children: <Widget>[
-            Material(
-              color: Theme.of(context).primaryColor,
-              child: Container(
-                padding: EdgeInsets.all(8.0),
-                height: kToolbarHeight,
-                child: Row(
-                  children: this._children(
-                    context,
-                    account.user.email,
-                  ),
-                ),
-              ),
+            _appBar(
+              context,
+              provider: account,
             ),
             Expanded(
-              child: this.body,
+              child: Scrollbar(
+                child: ListView(
+                  children: <Widget>[
+                    this.body,
+                    this._footer(context),
+                  ],
+                ),
+              ),
             ),
           ],
         );

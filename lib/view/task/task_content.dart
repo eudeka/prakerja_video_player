@@ -14,12 +14,17 @@ class TaskContent extends StatelessWidget {
   Widget _tile(int index, TaskProvider provider) {
     Quiz quiz = listQuiz[index];
     QuizValue value = provider.lastAnswer[index];
+    String question = '${index + 1}. ${quiz.question}';
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         ListTile(
-          title: SelectableText(quiz.question),
+          title: SelectableText(question),
+          contentPadding: EdgeInsets.symmetric(
+            vertical: 8.0,
+            horizontal: 16.0,
+          ),
         ),
         RadioListTile<String>(
           value: quiz.answerA,
@@ -59,6 +64,9 @@ class TaskContent extends StatelessWidget {
         Widget child,
       ) {
         return ListView.builder(
+          primary: false,
+          shrinkWrap: true,
+          padding: EdgeInsets.all(8.0),
           itemBuilder: (BuildContext context, int index) {
             if (index == listQuiz.length) {
               return Padding(
@@ -77,11 +85,15 @@ class TaskContent extends StatelessWidget {
                       barrierDismissible: false,
                     );
                   },
-                  child: Text('SUBMIT'),
+                  child: Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text('SUBMIT YOUR TASK'),
+                  ),
                 ),
               );
             }
             return Card(
+              margin: EdgeInsets.all(8.0),
               child: _tile(index, task),
             );
           },

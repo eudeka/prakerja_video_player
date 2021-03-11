@@ -23,7 +23,18 @@ class _TaskPageState extends State<TaskPage> {
   }
 
   Widget _child() {
-    if (_listQuiz.isEmpty) return Text('No Task');
+    if (_onLoad) {
+      return Padding(
+        padding: EdgeInsets.all(16.0),
+        child: CircularProgressIndicator.adaptive(),
+      );
+    }
+    if (_listQuiz.isEmpty) {
+      return Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Text('No Task'),
+      );
+    }
     return TaskContent(listQuiz: _listQuiz);
   }
 
@@ -37,7 +48,7 @@ class _TaskPageState extends State<TaskPage> {
   Widget build(BuildContext context) {
     return AppScaffold(
       body: Center(
-        child: _onLoad ? CircularProgressIndicator.adaptive() : _child(),
+        child: _child(),
       ),
     );
   }

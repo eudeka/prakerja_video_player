@@ -22,10 +22,7 @@ class _LoginPageState extends State<LoginPage> {
       Duration(
         seconds: 1,
       ),
-      (Timer timer) {
-        print(DateTime.now());
-        _account.checkLogin();
-      },
+      (Timer timer) => _account.checkLogin(),
     );
   }
 

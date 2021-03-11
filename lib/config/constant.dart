@@ -1,6 +1,5 @@
 class Constant {
   static final String name = 'Eudeka! Indonesia (beta)';
-  static final String version = '0.2.0';
   static final String _baseUrl = 'https://script.google.com/macros/s/';
   static final String studentUrl =
       '${_baseUrl}AKfycbymoIQZdw6pthto8B8bUxdE77y4ki0aa49uB9vX55uHMrZa-1Y/exec';
